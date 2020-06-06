@@ -1,0 +1,12 @@
+<ng-container *ngFor="let menu of layoutService.getMenu | async">
+    <template *ngIf="menu.aside.allow">
+      <ul>
+          <template *ngIf="user.buyer"></template>
+          <li *ngFor="let links of menu.aside.buyer-menu">
+                <a  [routerLink]="links.page"
+                [matTooltip]="links.desc" matTooltipPosition="left"> {{links.title}}
+            </a>
+          </li>
+      </ul>  
+    </template>
+</ng-container>

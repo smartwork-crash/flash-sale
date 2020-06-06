@@ -1,0 +1,48 @@
+[
+    {
+        "header": {
+            "allow": true,
+            "text": "Flash Sale",
+            "brandImageUrl": ""
+        },
+        "aside": {
+            "allow": true,
+            "buyer-menu": [
+                {
+                    "title": "Products",
+                    "desc": "",
+                    "root": true,
+                    "icon": "",
+                    "page": "/product"
+                },
+                {
+                    "title": "Cart",
+                    "desc": "",
+                    "root": true,
+                    "icon": "",
+                    "page": "/cart"
+                },
+                {
+                    "title": "Orders",
+                    "desc": "",
+                    "root": true,
+                    "icon": "",
+                    "page": "/orders"
+                }
+            ],
+            "seller-menu": [
+                {
+                    "title": "Products",
+                    "desc": "",
+                    "root": true,
+                    "icon": "",
+                    "page": "/product"
+                }
+            ]
+        },
+        "footer": {
+            "allow": false,
+            "text": ""
+        }
+    }
+]
