@@ -1,5 +1,5 @@
-<ng-container *ngFor="let style of layoutService.getMenu | async">
-        <template *ngIf="style.footer.allow">
-            <h2>{{style.footer.text}} </h2>
-        </template>
+<ng-container *ngFor="let style of menuObserver$ | async">
+    <ng-container *ngIf="style.footer.allow">
+        <h2>{{style.footer.text}} </h2>
     </ng-container>
+</ng-container>

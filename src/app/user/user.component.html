@@ -1,0 +1,22 @@
+<div class="bg-image"></div>
+
+<div class="form">
+  <mat-card>
+      <mat-card-header>
+          <mat-card-title>Select User Type</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field>
+            <mat-label>User Type
+            </mat-label>
+            <mat-select (selectionChange)="onUserSelected($event.value)" name="user">
+                <mat-option *ngFor="let option of user" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+            <br/>
+            <button class="standard" mat-raised-button (click)="assignUserType()">Submit</button>
+      </mat-card-content>
+  </mat-card>
+</div>

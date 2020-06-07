@@ -1,12 +1,20 @@
-<ng-container *ngFor="let menu of layoutService.getMenu | async">
-    <template *ngIf="menu.aside.allow">
+<ng-container *ngFor="let menu of menuObserver$ | async">
+    <ng-container *ngIf="menu.aside.allow">
       <ul>
-          <template *ngIf="user.buyer"></template>
-          <li *ngFor="let links of menu.aside.buyer-menu">
-                <a  [routerLink]="links.page"
-                [matTooltip]="links.desc" matTooltipPosition="left"> {{links.title}}
-            </a>
-          </li>
+          <ng-container *ngIf="user.buyer">
+            <li *ngFor="let links of menu.aside.buyerMenu">
+                  <a  [routerLink]="links.page" [routerLinkActive]="['active']"
+                  [matTooltip]="links.desc" matTooltipPosition="left"> {{links.title}}
+              </a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="user.seller">
+            <li *ngFor="let links of menu.aside.sellerMenu">
+                  <a  [routerLink]="links.page" [routerLinkActive]="['active']"
+                  [matTooltip]="links.desc" matTooltipPosition="left"> {{links.title}}
+              </a>
+            </li>
+          </ng-container>
       </ul>  
-    </template>
+    </ng-container>
 </ng-container>
