@@ -1,0 +1,23 @@
+  /* Style the list inside the menu */
+ ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color on hover */
+  li a:hover {
+    background-color: #555;
+    color: white;
+  }
+
+  li a.active {
+    background-color: #7B1FA2;
+    color: white;
+  }

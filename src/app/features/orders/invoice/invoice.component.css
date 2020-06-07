@@ -1,0 +1,17 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  thead {
+      font-weight: bolder;
+  }
+
+  table.tbody,thead,tr,td {
+      border: solid white;
+  }
+

@@ -1,5 +1,21 @@
-<ng-container *ngFor="let style of layoutService.getMenu | async">
-    <template *ngIf="style.header.allow">
-        <h2>{{style.header.text}} </h2>
-    </template>
-</ng-container>
+<section>
+    <header>
+        <ng-container *ngFor="let style of menuObserver$ | async">
+            <ng-container *ngIf="style.header.allow">
+                <h1>{{style.header.text}} </h1>
+            </ng-container>
+        </ng-container>
+    </header>
+    <nav>
+        <a *ngIf="user.buyer" [routerLink]="['/cart']" href="javascript:;">
+            <span class="link-icon">
+                <mat-icon matBadge="{{layoutService.countListener | async}}" matBadgeOverlap="false"
+                    matBadgeColor="primary" style="vertical-align: -webkit-baseline-middle;">add_shopping_cart
+                </mat-icon>
+            </span>
+        </a>
+        <a (click)="logout()" class="log" style="font-size: 20px; margin-left: 10px;">
+            Logout
+        </a>
+    </nav>
+</section>

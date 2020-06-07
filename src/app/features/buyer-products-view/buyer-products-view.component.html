@@ -1,0 +1,28 @@
+<mat-card class="mat-card-header">
+  Product List
+</mat-card>
+<p></p>
+<div class="container">
+  <div *ngFor="let product of products">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+      </mat-card-header>
+      <img style="height: 200px;" mat-card-image [src]="product.img || imgSrc" [alt]="product.description">
+      <mat-card-actions>
+        <button *ngIf="!getNumberOfThisProductAdded(product.id).length" (click)="addToCart(product)" mat-mini-fab color="primary">
+          <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+        <button *ngIf="getNumberOfThisProductAdded(product.id).length" (click)="addToCart(product)" mat-mini-fab color="primary">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+        <span *ngIf="getNumberOfThisProductAdded(product.id).length" style="padding-left: 2px;padding-right: 2px;">{{getNumberOfThisProductAdded(product.id).length}}</span>
+        <button *ngIf="getNumberOfThisProductAdded(product.id).length" (click)="removeFromCart(product.id)" mat-mini-fab color="primary">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+        <span style="margin-left: 10px;"><strong>{{product.price}} INR</strong></span>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

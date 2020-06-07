@@ -1,0 +1,49 @@
+<h2>Invoice</h2>
+<mat-dialog-content style="background: #FFFFFF;margin-top: 10px;">
+    <mat-card style="width: 100%;margin-top: 5px;">
+        <mat-card-content>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Product Name</td>
+                        <td>Product Brand</td>
+                        <td>Product Quantity</td>
+                        <td>Product Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let product of popupInfo.order; let last = last">
+                        <tr *ngIf="!last">
+                            <td>{{product.name}}</td>
+                            <td>{{product.brand}}</td>
+                            <td>{{product.totalQuantity}}</td>
+                            <td>{{product.totalPrice}} INR</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </mat-card-content>
+    </mat-card>
+    <div style="color: black;float: right; width: 100%;">
+        <ul>
+            <li><strong>Total Product Cost:</strong> <span
+                    style="float: right;">{{popupInfo.order[popupInfo.order.length-1].totalOrderCost-popupInfo.order[popupInfo.order.length-1].gst}}
+                    INR</span></li>
+            <li><strong>Seller Share:</strong> <span
+                    style="float: right;">{{popupInfo.order[popupInfo.order.length-1].sellerShare}} INR</span></li>
+            <li><strong>Application Share:</strong><span style="float: right;">
+                    {{popupInfo.order[popupInfo.order.length-1].appShare}} INR</span></li>
+            <li><strong>Charity:</strong><span style="float: right;">
+                    {{popupInfo.order[popupInfo.order.length-1].charityShare}} INR</span></li>
+            <li><strong>GST 19%:</strong> <span style="float: right;">{{popupInfo.order[popupInfo.order.length-1].gst}}
+                    INR</span></li>
+        </ul>
+        <hr />
+        <ul>
+            <li><strong>Total Cost:</strong><span style="float: right;"> {{popupInfo.order.totalOrderCost}}</span></li>
+        </ul>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions style="float: right;">
+    <button mat-button class="red" mat-dialog-close>Close</button>
+</mat-dialog-actions>

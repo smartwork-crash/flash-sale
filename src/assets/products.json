@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "name": "Galaxy S20",
+        "description": "Samsung Phone",
+        "brand": "Samsung",
+        "price": 80000,
+        "img": "../../assets/images/s20.jpg",
+        "saleDays": "",
+        "saleInformation": [
+            {
+                "day": "",
+                "saleStartTime": {},
+                "saleEndTime": {}
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Apple 11 Pro Max",
+        "brand": "xApple",
+        "price": 110000,
+        "img": "../../assets/images/iphone11.jpg",
+        "description": "Apple Phone",
+        "saleDays": "",
+        "saleInformation": [
+            {
+                "day": "",
+                "saleStartTime": {},
+                "saleEndTime": {}
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Mi 10",
+        "brand": "Xiomi",
+        "price": 42000,
+        "img": "../../assets/images/mi10.jpg",
+        "description": "Mi Phone",
+        "saleDays": "",
+        "saleInformation": [
+            {
+                "day": "",
+                "saleStartTime": {},
+                "saleEndTime": {}
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "OnePlus 6",
+        "brand": "OnePlus",
+        "price": 40000,
+        "img": "../../assets/images/oneplus6.jpg",
+        "description": "OnePlus Phone",
+        "saleDays": "",
+        "saleInformation": [
+            {
+                "day": "",
+                "saleStartTime": {},
+                "saleEndTime": {}
+            }
+        ]
+    }
+]

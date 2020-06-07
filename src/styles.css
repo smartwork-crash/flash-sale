@@ -1,8 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
-* {
+/* * {
     box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  } */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  background-color: lightgray;
+  padding: 10px;
+  grid-gap: 50px;
+  overflow: auto;
+  align-content: center;
+}
+
+.mat-card-header {
+  font-size: 18px !important;
+  color: whitesmoke !important;
+  font-weight: 500 !important;
+  margin-bottom: 5px !important;
+  width: 100% !important;
+}
+
+.mat-card-header-text {
+  width: 100% !important;
+}
+
+mat-label, input {
+  color: black;
+}
+
+.inner-card {
+  background-color: lightgray;
+  margin-bottom: 10px;
+}
+
+.inner-card > mat-card-title {
+  color: black;
+}
+
+.add-button {
+  float: right !important;
+}
+
+.orange {
+  background-color: #d79922 !important;
+}
+
+.default-button {
+  background-color: rgb(77, 80, 104);
+  color: aliceblue;
+}
+
+.green {
+  background-color: #3aafa9 !important;
+}
+
+.red {
+  background-color: #b23850 !important;
+}
+
+.standard {
+  background-color: rgb(77, 80, 104) !important;
+  color: aliceblue !important;
+}
+
+
+.button {
+  background-color: #7B1FA2 !important;
+  color: aliceblue !important;
+  margin-left: 20px !important;
+  float: right !important;
+}
+
+.asterix-required {
+  color: red;
+}

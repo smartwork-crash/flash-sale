@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LayoutService } from '../layout.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  public menuObserver$: Observable<any>;
+
+  constructor(public layoutService: LayoutService) { }
 
   ngOnInit(): void {
+    this.menuObserver$ = this.layoutService.getMenu();
   }
 
 }

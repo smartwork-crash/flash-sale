@@ -1,0 +1,32 @@
+section {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  header {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+
+  nav {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    text-align: end;
+  }
+
+  .link-icon {
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+  }
+
+  .log  {
+    cursor: pointer;
+    color: rgb(3, 3, 117);
+  }

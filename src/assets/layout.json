@@ -7,13 +7,13 @@
         },
         "aside": {
             "allow": true,
-            "buyer-menu": [
+            "buyerMenu": [
                 {
                     "title": "Products",
                     "desc": "",
                     "root": true,
                     "icon": "",
-                    "page": "/product"
+                    "page": "/buy-product"
                 },
                 {
                     "title": "Cart",
@@ -30,19 +30,19 @@
                     "page": "/orders"
                 }
             ],
-            "seller-menu": [
+            "sellerMenu": [
                 {
                     "title": "Products",
                     "desc": "",
                     "root": true,
                     "icon": "",
-                    "page": "/product"
+                    "page": "/sell-product"
                 }
             ]
         },
         "footer": {
-            "allow": false,
-            "text": ""
+            "allow": true,
+            "text": "A Sample by @Harsh Pandey"
         }
     }
 ]
