@@ -1,1 +1,125 @@
-<p>product-sale-config works!</p>
+<ng-container>
+    <form [formGroup]="productForm" (ngSubmit)="addProduct($event)">
+        <mat-card class="mat-card-header">
+            <mat-card-header>
+                <mat-card-title>
+                    Add New Product
+                    <button class='button' mat-raised-button type="submit" style="float: right">Save</button>
+                    <button class=' red' mat-raised-button mat-dialog-close type="button" style="float: right"
+                        mat-button tabindex="-1">Cancel</button>
+                </mat-card-title>
+            </mat-card-header>
+        </mat-card>
+        <mat-dialog-content style="background: #FFFFFF">
+            <div class="container">
+                <div>
+                    <mat-form-field>
+                        <input matInput name="productName" formControlName="name" type="text">
+                        <mat-label>Product Name
+                            <span class="asterix-required">*</span>
+                        </mat-label>
+                        <ng-container *ngIf="productForm.get('name').hasError('required')" ngProjectAs="mat-error">
+                            <mat-error>Product Name is required</mat-error>
+                        </ng-container>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput name="brandName" formControlName="brand" type="text">
+                        <mat-label>Product Brand
+                            <span class="asterix-required">*</span>
+                        </mat-label>
+                        <ng-container *ngIf="productForm.get('brand').hasError('required')" ngProjectAs="mat-error">
+                            <mat-error>Product Brand is required</mat-error>
+                        </ng-container>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput name="price" formControlName="price" type="number">
+                        <mat-label>Product Price
+                            <span class="asterix-required">*</span>
+                        </mat-label>
+                        <ng-container *ngIf="productForm.get('price').hasError('required')" ngProjectAs="mat-error">
+                            <mat-error>Product Price is required</mat-error>
+                        </ng-container>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput name="description" formControlName="description" type="text">
+                        <mat-label>Product Description
+                        </mat-label>
+                        <ng-container *ngIf="productForm.get('brand').hasError('required')" ngProjectAs="mat-error">
+                            <mat-error>Product Description is required</mat-error>
+                        </ng-container>
+                    </mat-form-field>
+                </div>
+            </div>
+            <hr />
+            <mat-card class="inner-card">
+                <mat-card-title>
+                    Flash Sale Settings
+                </mat-card-title>
+                <mat-card-content>
+                    <mat-form-field>
+                        <mat-label>Sale Days
+                            <span class="asterix-required">*</span>
+                        </mat-label>
+                        <mat-select (selectionChange)="onSaleDaysSelected($event.value)" name="days"
+                            formControlName="saleDays">
+                            <mat-option *ngFor="let option of saleDaysObserver$ | async" [value]="option.name">
+                                {{option.name}}
+                            </mat-option>
+                        </mat-select>
+                        <ng-container *ngIf="productForm.get('saleDays').hasError('required')" ngProjectAs="mat-error">
+                            <mat-error>Sale Days is required</mat-error>
+                        </ng-container>
+                    </mat-form-field>
+                   <div>
+                    <span class="asterix-required">*Sale can be max upto 2hours</span>
+                   </div>
+                    <div class="container">
+                        <ng-container formArrayName="saleInformation">
+                            <ng-container
+                                *ngFor="let forms of this.productForm.get('saleInformation')['controls']; let i = index; let last = last"
+                                [formGroupName]="i">
+                                <div>
+                                    <mat-label>Sale Start Time</mat-label>
+                                    <ngb-timepicker formControlName="saleStartTime"></ngb-timepicker>
+                                </div>
+                                <div>
+                                    <mat-label>Sale End Time</mat-label>
+                                    <ngb-timepicker formControlName="saleEndTime"></ngb-timepicker>
+                                </div>
+                                <div *ngIf="specificDaySelected">
+                                    <mat-form-field>
+                                        <mat-label>Day
+                                            <span class="asterix-required">*</span>
+                                        </mat-label>
+                                        <mat-select (selectionChange)="onDaySelect($event.value)" name="day"
+                                            formControlName="day">
+                                            <mat-option *ngFor="let option of dayObserver$ | async" [value]="option.id">
+                                                {{option.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <ng-container *ngIf="productForm.get('saleInformation')['controls'][i].get('day').hasError('required')"
+                                            ngProjectAs="mat-error">
+                                            <mat-error>Sale Days is required</mat-error>
+                                        </ng-container>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="specificDaySelected">
+                                    <button *ngIf="last" type="button" class="add-button" mat-raised-button
+                                        (click)="addSpecificDay()">Add Day</button>
+                                    <button *ngIf="!last" type="button" class="button red" mat-raised-button
+                                        (click)="removeSpecificDay(i)">Remove Day</button>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </mat-dialog-content>
+    </form>
+</ng-container>

@@ -1,1 +1,44 @@
-<p>orders works!</p>
+<mat-card class="mat-card-body">
+    <mat-card-header>
+        <mat-card-title>
+            Orders
+            <button class='button' [routerLink]="['/buy-product']" mat-raised-button type="button" style="float: right">Buy</button>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table style="width: 100%;">
+            <tr *ngFor="let order of orders">
+                <td>
+                    <mat-card style="width: 100%;background-color: gainsboro;">
+                        <mat-card-title>
+                            <button mat-mini-fab matTooltip="view Invoice" (click)="viewInvoice(order)">
+                                <mat-icon>filter_list</mat-icon>
+                              </button>
+                        </mat-card-title>
+                        <mat-card-content>
+                            <div class="container">
+                                <ng-container *ngFor="let orderDetails of order">
+                                    <div>
+                                        <strong>Product Name:</strong> {{orderDetails.name}}
+                                    </div>
+                                    <div>
+                                        <strong>Product Brand:</strong> {{orderDetails.brand}}
+                                    </div>
+                                    <div>
+                                        <strong>Product Quantity:</strong> {{orderDetails.totalQuantity}}
+                                    </div>
+                                    <div>
+                                        <strong>Product Price:</strong> {{orderDetails.totalPrice}}
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent($event)">
+    </mat-paginator>
+</mat-card>

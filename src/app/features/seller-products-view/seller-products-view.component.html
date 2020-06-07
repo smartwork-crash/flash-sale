@@ -1,14 +1,28 @@
-<div class="container">
-    <div *ngFor="let product of products">
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Product List
+      <button mat-raised-button class="button" (click)="saleModificationPopup()">Add New Product</button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="container">
+      <div *ngFor="let product of products">
         <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>{{product.name}}</mat-card-title>
-              <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="product.img" [alt]="product.description">
-            <mat-card-actions>
-              <button (click)="saleModificationPopup()" mat-raised-button color="primary">Modify Sale Setting</button>
-            </mat-card-actions>
-          </mat-card>
+          <mat-card-header>
+            <mat-card-title>{{product.name}}</mat-card-title>
+            <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+          </mat-card-header>
+          <img style="height: 200px;" mat-card-image [src]="product.img || imgSrc" [alt]="product.description">
+          <mat-card-actions>
+            <button matTooltip="Modify product details" (click)="saleModificationPopup(product)" mat-mini-fab
+              color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <span style="margin-left: 10px;"><strong>{{product.price}} INR</strong></span>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
-</div>
+  </mat-card-content>
+</mat-card>

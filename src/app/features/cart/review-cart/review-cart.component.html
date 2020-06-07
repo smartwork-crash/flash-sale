@@ -1,0 +1,66 @@
+<h2>Cart Item</h2>
+<mat-dialog-content style="background: #FFFFFF">
+    <mat-card *ngFor="let product of popupInfo.productGroup" style="width: 100%;margin-bottom: 5px;">
+        <mat-card-content>
+            <div class="container">
+                <div>
+                    <ul>
+                        <li><strong>Product Name:</strong> {{product.name}}</li>
+                        <li><strong>Product Brand:</strong> {{product.brand}}</li>
+                        <li><strong>Product Price:</strong> {{product.price}}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Total Quantity:</strong> {{getNumberOfThisProductAdded(product.id).length}}
+                </div>
+                <div>
+                    <strong>Total Cost:</strong> {{costOfProductGroup(product.id,product.price)}} INR
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <hr />
+    <h2 style="color: black;">Removed Item (due to sale over)</h2>
+    <mat-card *ngFor="let product of popupInfo.removedProduct" style="width: 100%;margin-bottom: 5px;">
+        <mat-card-content>
+            <div class="container">
+                <div>
+                    <ul>
+                        <li><strong>Product Name:</strong> {{product.name}}</li>
+                        <li><strong>Product Brand:</strong> {{product.brand}}</li>
+                        <li><strong>Product Price:</strong> {{product.description}}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Total Quantity:</strong> {{getNumberOfThisProductAdded(product.id).length}}
+                </div>
+                <div>
+                    <strong>Total Cost:</strong> {{costOfProductGroup(product.id,product.price)}}
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <hr />
+    <div style="color: black;float: right; width: 100%;">
+        <ul>
+            <li><strong>Total Product Cost:</strong> <span style="float: right;">{{totalBill()}} INR</span></li>
+            <li><strong>Seller Share:</strong> <span style="float: right;">{{priceDistribution('seller')}} INR</span>
+            </li>
+            <li><strong>Application Share:</strong><span style="float: right;"> {{priceDistribution('app')}} INR</span>
+            </li>
+            <li><strong>Charity:</strong><span style="float: right;"> {{priceDistribution('charity')}} INR</span></li>
+            <li><strong>GST 19%:</strong> <span style="float: right;">{{priceDistribution('gst')}} INR</span></li>
+        </ul>
+        <hr />
+        <ul>
+            <li><strong>Total Cost:</strong><span style="float: right;"> {{totalBill() + priceDistribution('gst')}}
+                    INR</span></li>
+        </ul>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions style="float: right;">
+    <button mat-button class="red" mat-dialog-close>Cancel</button>
+    <button mat-button class="button" (click)="Reviewed()" cdkFocusInitial>Buy Anyway</button>
+</mat-dialog-actions>

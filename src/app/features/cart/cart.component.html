@@ -1,1 +1,39 @@
-<p>cart works!</p>
+<mat-card class="mat-card-body">
+    <mat-card-header>
+        <mat-card-title>
+            Cart Items
+            <button class='button' [disabled]="!productGroupInCart.length" (click)="buyProduct()" mat-raised-button type="button" style="float: right">Buy</button>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card *ngFor="let product of productGroupInCart" style="width: 100%;">
+            <mat-card-content>
+                <div class="container">
+                    <div>
+                        <ul>
+                            <li><strong>Product Name:</strong> {{product.name}}</li>
+                            <li><strong>Product Brand:</strong> {{product.brand}}</li>
+                            <li><strong>Product Price:</strong> {{product.price}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <button *ngIf="getNumberOfThisProductAdded(product.id).length" (click)="addToCart(product)"
+                            mat-mini-fab color="primary">
+                            <mat-icon>add_circle</mat-icon>
+                        </button>
+                        <span *ngIf="getNumberOfThisProductAdded(product.id).length"
+                            style="padding-left: 2px;padding-right: 2px;">{{getNumberOfThisProductAdded(product.id).length}}</span>
+                        <button *ngIf="getNumberOfThisProductAdded(product.id).length"
+                            (click)="removeFromCart(product.id)" mat-mini-fab color="primary">
+                            <mat-icon>remove_circle</mat-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <img style="height: 200px;" mat-card-image [src]="product.img" [alt]="product.description">
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+</mat-card>
