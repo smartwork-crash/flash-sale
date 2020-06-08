@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ReviewCartComponent } from './review-cart/review-cart.component';
 import Swal from 'sweetalert2';
 
-const weekDays = [
+export const weekDays = [
   "Sunday",
   "Monday",
   "Tuesday",
