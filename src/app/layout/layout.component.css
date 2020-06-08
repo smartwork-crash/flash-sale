@@ -11,6 +11,7 @@ header {
   section {
     display: -webkit-flex;
     display: flex;
+    height: 81vh;
   }
   
   /* Style the navigation menu */

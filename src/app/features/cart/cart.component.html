@@ -30,7 +30,7 @@
                         </button>
                     </div>
                     <div>
-                        <img style="height: 200px;" mat-card-image [src]="product.img" [alt]="product.description">
+                        <img style="height: 200px;" mat-card-image [src]="product.img || imgSrc" [alt]="product.description">
                     </div>
                 </div>
             </mat-card-content>
