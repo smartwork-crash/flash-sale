@@ -36,8 +36,6 @@ export class ReviewCartComponent implements OnInit, OnDestroy {
             }
             }
             else {
-              console.log(value.saleInformation[0],currentHour,value.saleInformation[0].saleEndTime.hour < currentHour,value.saleInformation[0].saleEndTime.hour === currentHour, currentMinute,value.saleInformation[0].saleEndTime.minute,(value.saleInformation[0].saleEndTime.minute-currentMinute), (value.saleInformation[0].saleEndTime.minute-currentMinute) <= 0);
-              
               if (value.saleInformation[0].saleEndTime.hour < currentHour || (value.saleInformation[0].saleEndTime.hour === currentHour && (value.saleInformation[0].saleEndTime.minute-currentMinute) <= 0)) {
                 this.popupInfo.removedProduct.push(value);
                 this.popupInfo.productGroup.splice(index,1);
