@@ -10,9 +10,9 @@ section {
   }
 
   nav {
-    -webkit-flex: 3;
-    -ms-flex: 3;
-    flex: 3;
+    -webkit-flex: 6;
+    -ms-flex: 6;
+    flex: 6;
     text-align: end;
   }
 

@@ -72,18 +72,14 @@ export class ReviewCartComponent implements OnInit {
             this.popupInfo.productGroup[index].totalQuantity = this.getNumberOfThisProductAdded(value.id).length;
             this.popupInfo.productGroup[index].totalPrice = this.costOfProductGroup(value.id, value.price);
           })
-          console.log(typeof this.popupInfo.productGroup);
-          
           order.push(this.popupInfo.productGroup);
           order[order.length - 1].push({
-          'gst': this.priceDistribution('gst'),
-          'sellerShare': this.priceDistribution('seller'),
-          'appShare': this.priceDistribution('app'),
-          'charityShare': this.priceDistribution('charity'),
-          'totalOrderCost': this.priceDistribution('gst') + this.totalBill()
-        })
-          console.log(order,JSON.stringify(order));
-          
+            'gst': this.priceDistribution('gst'),
+            'sellerShare': this.priceDistribution('seller'),
+            'appShare': this.priceDistribution('app'),
+            'charityShare': this.priceDistribution('charity'),
+            'totalOrderCost': this.priceDistribution('gst') + this.totalBill()
+          })
           localStorage.setItem('orders', JSON.stringify(order));
           this.dialogRef.close('order');
         }

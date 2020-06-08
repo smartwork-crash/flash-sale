@@ -35,8 +35,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem("cart") !== null) this.productInCart = JSON.parse(localStorage.getItem("cart"));
     this.productGroupInCart = _.uniqBy(this.productInCart, 'id');
-    console.log(this.productGroupInCart);
-
   }
 
   addToCart(product: Object) {
@@ -50,7 +48,6 @@ export class CartComponent implements OnInit {
 
   removeFromCart(id: number) {
     let index = this.productInCart.findIndex(product => product.id === id);
-    console.log(index);
     this.productInCart.splice(index, 1);
     this.productGroupInCart = _.uniqBy(this.productInCart, 'id');
     localStorage.setItem('cart', JSON.stringify(this.productInCart));
@@ -74,14 +71,8 @@ export class CartComponent implements OnInit {
     let removeItem = [];
     let saleOver: boolean;
     var date = new Date();
-    console.log(this.productGroupInCart);
     for (let product of this.productGroupInCart) {
       let currentDay = weekDays[date.getDay()];
-      console.log(product);
-      console.log((product.saleDays === 'Weekends' && (date.getDay() == 0 || date.getDay() == 6)), (date.getDay() == 0 || date.getDay() == 6), date.getDay());
-      console.log((product.saleDays === 'Weekdays' && (date.getDay() > 0 && date.getDay() < 6)));
-      console.log((product.saleDays === 'Everyday'));
-
       if ((product.saleDays === 'Weekends' && (date.getDay() == 0 || date.getDay() == 6))
         || (product.saleDays === 'Weekdays' && (date.getDay() > 0 && date.getDay() < 6))
         || product.saleDays === 'Everyday') {
@@ -92,7 +83,7 @@ export class CartComponent implements OnInit {
         if (saleAvailable) {
           saleOver = this.checkTimeSlot([saleAvailable]);
         }
-        else saleOver =true;
+        else saleOver = true;
       }
       else {
         removeItem.push(product);
@@ -100,7 +91,6 @@ export class CartComponent implements OnInit {
       if (saleOver) {
         removeItem.push(product);
       }
-      console.log(this.productGroupInCart);
       saleOver = false;
     }
     this.productGroupInCart = this.productGroupInCart.filter((cartProduct) => {
@@ -112,8 +102,6 @@ export class CartComponent implements OnInit {
   }
 
   checkTimeSlot(products) {
-    console.log(products);
-
     let date = new Date();
     let currentHour = date.getHours();
     var currentMinute = date.getMinutes();
@@ -135,7 +123,6 @@ export class CartComponent implements OnInit {
     });
 
     popupReference.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === 'order') {
         localStorage.removeItem('cart');
         Swal.fire({

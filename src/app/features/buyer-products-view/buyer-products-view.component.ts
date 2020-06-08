@@ -20,15 +20,15 @@ export class BuyerProductsViewComponent implements OnInit {
   constructor(
     private featureService: FeaturesService,
     private layoutService: LayoutService,
-     private _snackBar: MatSnackBar
-     ) { }
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     if (localStorage.getItem("products") === null) {
       this.productObserver$ = this.featureService.getProducts();
       this.subscriber = this.productObserver$.subscribe(products => {
         this.products = products;
-      localStorage.setItem('products',JSON.stringify(products));
+        localStorage.setItem('products', JSON.stringify(products));
       })
     }
     else
@@ -47,9 +47,8 @@ export class BuyerProductsViewComponent implements OnInit {
   }
 
   removeFromCart(id: number) {
-     let index = this.productInCart.findIndex(product => product.id === id);
-     console.log(index);
-     this.productInCart.splice(index,1);
+    let index = this.productInCart.findIndex(product => product.id === id);
+    this.productInCart.splice(index, 1);
     localStorage.setItem('cart', JSON.stringify(this.productInCart));
     this.layoutService.getCartCount(this.productInCart.length);
     this._snackBar.open('Product Removed', 'Close', {
@@ -58,8 +57,8 @@ export class BuyerProductsViewComponent implements OnInit {
   }
 
   getNumberOfThisProductAdded(id: number) {
-    if(this.productInCart.length)
-    return this.productInCart.filter(product => product.id === id);
+    if (this.productInCart.length)
+      return this.productInCart.filter(product => product.id === id);
     else return [];
   }
 

@@ -17,19 +17,17 @@ export class ProductSaleConfigComponent implements OnInit {
   specificDaySelected: boolean;
 
   constructor(
-    private featureService: FeaturesService, 
+    private featureService: FeaturesService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ProductSaleConfigComponent>,
     @Inject(MAT_DIALOG_DATA) public popupInfo: any,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.saleDaysObserver$ = this.featureService.getSaleDays();
     this.dayObserver$ = this.featureService.getDays();
     this.createProductForm();
-    console.log(this.popupInfo.product);
-    
-    if(this.popupInfo.product) this.productForm.setValue(this.popupInfo.product)
+    if (this.popupInfo.product) this.productForm.setValue(this.popupInfo.product)
   }
 
   createProductForm() {
@@ -64,7 +62,7 @@ export class ProductSaleConfigComponent implements OnInit {
   }
 
   onSaleDaysSelected(data: string) {
-    if(data === 'Specific Days') {
+    if (data === 'Specific Days') {
       this.specificDaySelected = true;
     }
     else {
@@ -77,27 +75,20 @@ export class ProductSaleConfigComponent implements OnInit {
   }
 
   addProduct(event: Event) {
-    if(this.productForm.valid){
+    if (this.productForm.valid) {
       let saleMoreThan2Hours = false;
       let hourMoreThan21;
-console.log(this.productForm.value);
-      for(let info of this.productForm.value.saleInformation) {
-        console.log(info.saleEndTime.hour);
-        
-        if(info.saleStartTime.hour > 21) hourMoreThan21 = info.saleStartTime.hour - 20;
-        console.log(hourMoreThan21);
+      for (let info of this.productForm.value.saleInformation) {
+        if (info.saleStartTime.hour > 21) hourMoreThan21 = info.saleStartTime.hour - 20;
         let hourDifference = Math.abs((hourMoreThan21 && hourMoreThan21 - info.saleEndTime.hour) || (info.saleEndTime.hour - info.saleStartTime.hour));
         let minDifference = info.saleEndTime.minute - info.saleStartTime.minute;
-        console.log(hourDifference,minDifference);
-        
-        if(hourDifference > 2 || (hourDifference === 2 && minDifference > 0))
-        {
+        if (hourDifference > 2 || (hourDifference === 2 && minDifference > 0)) {
           Swal.fire({
             title: 'Error!',
             text: 'Sale exceeded 2 hour limit',
             icon: 'error',
             confirmButtonText: 'Ok'
-          }) 
+          })
           return 0;
         }
       }
