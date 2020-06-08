@@ -7,21 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class UserAuthGuard implements CanActivate {
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let user = localStorage.getItem('user');
-      console.log(user);
-      
-      if (user) {
-        return true
-      }
-      else{
-        this.router.navigateByUrl('/user');
-        return false;
-      }
+    let user = localStorage.getItem('user');
+    if (user) {
+      return true
+    }
+    else {
+      this.router.navigateByUrl('/user');
+      return false;
+    }
   }
-  
+
 }

@@ -1,13 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { weekDays } from '../cart.component'
 
 @Component({
   selector: 'app-review-cart',
   templateUrl: './review-cart.component.html',
   styleUrls: ['./review-cart.component.css']
 })
-export class ReviewCartComponent implements OnInit {
+export class ReviewCartComponent implements OnInit, OnDestroy {
+
+  saleTimer: any;
 
   constructor(
     private dialogRef: MatDialogRef<ReviewCartComponent>,
@@ -15,6 +18,36 @@ export class ReviewCartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.saleTimer = setInterval(() => {
+      if (this.popupInfo.productGroup.length) {
+        this.popupInfo.productGroup.forEach((value, index) => {
+          if (value.saleInformation.length){
+          let date = new Date();
+          let currentHour = date.getHours();
+          var currentMinute = date.getMinutes();
+            if (value.saleInformation.length > 1) {
+              let currentDay = weekDays[date.getDay()];
+              let saleAvailable = value.saleInformation.saleInformation.find(info => info.day === currentDay);
+              if(saleAvailable){
+              if (saleAvailable.saleEndTime.hour < currentHour || (saleAvailable.saleEndTime.hour === currentHour && (value.saleInformation[0].saleEndTime.minute-currentMinute) <= 0)) {
+                this.popupInfo.removedProduct.push(value);
+                this.popupInfo.productGroup.splice(index,1);
+              }
+            }
+            }
+            else {
+              console.log(value.saleInformation[0],currentHour,value.saleInformation[0].saleEndTime.hour < currentHour,value.saleInformation[0].saleEndTime.hour === currentHour, currentMinute,value.saleInformation[0].saleEndTime.minute,(value.saleInformation[0].saleEndTime.minute-currentMinute), (value.saleInformation[0].saleEndTime.minute-currentMinute) <= 0);
+              
+              if (value.saleInformation[0].saleEndTime.hour < currentHour || (value.saleInformation[0].saleEndTime.hour === currentHour && (value.saleInformation[0].saleEndTime.minute-currentMinute) <= 0)) {
+                this.popupInfo.removedProduct.push(value);
+                this.popupInfo.productGroup.splice(index,1);
+              }
+            }
+          }
+        })
+      }
+    }, 1000)
+
   }
 
   getNumberOfThisProductAdded(id: number) {
@@ -72,18 +105,14 @@ export class ReviewCartComponent implements OnInit {
             this.popupInfo.productGroup[index].totalQuantity = this.getNumberOfThisProductAdded(value.id).length;
             this.popupInfo.productGroup[index].totalPrice = this.costOfProductGroup(value.id, value.price);
           })
-          console.log(typeof this.popupInfo.productGroup);
-          
           order.push(this.popupInfo.productGroup);
           order[order.length - 1].push({
-          'gst': this.priceDistribution('gst'),
-          'sellerShare': this.priceDistribution('seller'),
-          'appShare': this.priceDistribution('app'),
-          'charityShare': this.priceDistribution('charity'),
-          'totalOrderCost': this.priceDistribution('gst') + this.totalBill()
-        })
-          console.log(order,JSON.stringify(order));
-          
+            'gst': this.priceDistribution('gst'),
+            'sellerShare': this.priceDistribution('seller'),
+            'appShare': this.priceDistribution('app'),
+            'charityShare': this.priceDistribution('charity'),
+            'totalOrderCost': this.priceDistribution('gst') + this.totalBill()
+          })
           localStorage.setItem('orders', JSON.stringify(order));
           this.dialogRef.close('order');
         }
@@ -99,6 +128,10 @@ export class ReviewCartComponent implements OnInit {
         this.dialogRef.close();
       })
     }
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.saleTimer);
   }
 
 }

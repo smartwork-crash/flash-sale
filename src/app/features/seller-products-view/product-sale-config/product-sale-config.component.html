@@ -99,7 +99,7 @@
                                         </mat-label>
                                         <mat-select (selectionChange)="onDaySelect($event.value)" name="day"
                                             formControlName="day">
-                                            <mat-option *ngFor="let option of dayObserver$ | async" [value]="option.id">
+                                            <mat-option *ngFor="let option of dayObserver$ | async" [value]="option.name">
                                                 {{option.name}}
                                             </mat-option>
                                         </mat-select>

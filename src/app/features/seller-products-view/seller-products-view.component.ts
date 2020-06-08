@@ -20,8 +20,6 @@ export class SellerProductsViewComponent implements OnInit {
   constructor(private popup: MatDialog, private featureService: FeaturesService) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem("products"));
-
     if (localStorage.getItem("products") === null) {
       this.productObserver$ = this.featureService.getProducts();
       this.subscriber = this.productObserver$.subscribe(products => {
@@ -41,9 +39,7 @@ export class SellerProductsViewComponent implements OnInit {
 
     popupReference.afterClosed().subscribe(product => {
       if (product) {
-        console.log(product);
-        console.log(product);
-        if(product.id) this.products.splice(this.products.findIndex(data => data.id == product.id),1);
+        if (product.id) this.products.splice(this.products.findIndex(data => data.id == product.id), 1);
         else product.id = this.products.length + 1;
         this.products.push(product);
         localStorage.setItem('products', JSON.stringify(this.products));
