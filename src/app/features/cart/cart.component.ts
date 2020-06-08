@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import * as  _ from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LayoutService } from 'src/app/layout/layout.service';
@@ -29,6 +29,7 @@ export class CartComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private popup: MatDialog,
+    private ref: ChangeDetectorRef,
     private layoutService: LayoutService,
   ) { }
 
@@ -134,7 +135,7 @@ export class CartComponent implements OnInit {
         })
       }
       this.layoutService.getCartCount((localStorage.getItem('cart') && JSON.parse(localStorage.getItem('cart')).length) || 0);
-      this.ngOnInit();
+      this.ref.detectChanges();
     })
   }
 

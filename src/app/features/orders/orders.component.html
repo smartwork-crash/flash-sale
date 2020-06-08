@@ -38,7 +38,7 @@
             </tr>
         </table>
     </mat-card-content>
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    <mat-paginator [length]="length" showFirstLastButtons [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
         (page)="pageEvent($event)">
     </mat-paginator>
 </mat-card>
